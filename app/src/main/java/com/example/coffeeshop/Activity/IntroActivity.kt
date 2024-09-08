@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.coffeeshop.databinding.ActivityIntroBinding
 
+
 class IntroActivity : BaseActivity() {
     private lateinit var binding: ActivityIntroBinding
     override fun onCreate(savedInstanceState: Bundle?) {
