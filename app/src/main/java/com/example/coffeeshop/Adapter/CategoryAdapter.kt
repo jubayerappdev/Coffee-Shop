@@ -8,11 +8,13 @@ import com.example.coffeeshop.Model.CategoryModel
 import com.example.coffeeshop.R
 import com.example.coffeeshop.databinding.ViewholderCategoryBinding
 
-class CategoryAdapter (val items:MutableList<CategoryModel>): RecyclerView.Adapter<ViewHolder>(){
+class CategoryAdapter (val items:MutableList<CategoryModel>): RecyclerView.Adapter<CategoryAdapter.ViewHolder>(){
 
     private lateinit var context:Context
     private var selectedPosition=-1
     private var lastSelectedPosition=-1
+
+    inner class  ViewHolder(val binding: ViewholderCategoryBinding): RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,4 +46,3 @@ class CategoryAdapter (val items:MutableList<CategoryModel>): RecyclerView.Adapt
 }
 
 
-class  ViewHolder(val binding: ViewholderCategoryBinding): RecyclerView.ViewHolder(binding.root)

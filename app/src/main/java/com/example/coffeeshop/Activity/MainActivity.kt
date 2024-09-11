@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coffeeshop.Adapter.CategoryAdapter
+import com.example.coffeeshop.Adapter.PopularAdapter
 import com.example.coffeeshop.R
 import com.example.coffeeshop.ViewModel.MainViewModel
 import com.example.coffeeshop.databinding.ActivityMainBinding
@@ -18,11 +19,25 @@ class MainActivity : BaseActivity() {
     private val viewModel = MainViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
         initCategory()
+        initPopular()
+
+    }
+
+    private fun initPopular() {
+        binding.popularProgressBar.visibility = View.VISIBLE
+        viewModel.popular.observe(this, Observer {
+            binding.popularRv.layoutManager =
+                LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            binding.popularRv.adapter = PopularAdapter(it)
+            binding.popularProgressBar.visibility = View.GONE
+        })
+
+        viewModel.loadPopular()
 
     }
 
@@ -30,7 +45,7 @@ class MainActivity : BaseActivity() {
         binding.categoryProgressBar.visibility = View.VISIBLE
 
         viewModel.category.observe(this, Observer {
-            binding.categoryRv.layoutManager=
+            binding.categoryRv.layoutManager =
                 LinearLayoutManager(
                     this@MainActivity,
                     LinearLayoutManager.HORIZONTAL,
